@@ -1,76 +1,93 @@
 import Image from "next/image";
 import Link from "next/link";
-
-export interface Exercise {
-  id: number;
-  name: string;
-  image: string;
-  muscleGroups: string[];
-  equipment: string;
-  difficulty: string;
-  duration: number;
-  caloriesBurned: number;
-  sets: number;
-  reps: string;
-  rating: number;
-  description: string;
-}
+import type { IExercise } from "@/components/type/exercise";
 
 interface ExerciseCardProps {
-  exercise: Exercise;
+  exercise: IExercise;
 }
 
 const ExerciseCard = ({ exercise }: ExerciseCardProps) => {
   return (
     <Link
       href={`/exercises/${exercise.id}`}
-      className="group block overflow-hidden rounded-xl border border-zinc-800 bg-[#14161b] transition duration-200 hover:-translate-y-1 hover:border-[#b8ff00]/40"
+      className="group flex flex-col overflow-hidden rounded-2xl bg-[#121417] p-3 transition-transform duration-300 hover:-translate-y-1"
     >
-      <div className="relative aspect-video overflow-hidden bg-zinc-900">
+      {/* Image Container */}
+      <div className="relative h-48 w-full overflow-hidden rounded-xl bg-zinc-800">
         <Image
           src={exercise.image}
           alt={exercise.name}
           fill
-          sizes="(max-width: 768px) 100vw, (max-width: 1280px) 33vw, 400px"
-          className="object-cover transition duration-300 group-hover:scale-105"
+          className="object-cover transition-transform duration-500 group-hover:scale-105"
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
         />
       </div>
 
-      <div className="p-4">
-        <div className="mb-3 flex flex-wrap gap-2">
+      {/* Content Area */}
+      <div className="flex flex-1 flex-col pt-4 px-1">
+        {/* Muscle Groups Tags */}
+        <div className="mb-2 flex flex-wrap gap-1.5">
           {exercise.muscleGroups.map((muscle) => (
             <span
               key={muscle}
-              className="rounded-full bg-[#b8ff00] px-2.5 py-1 text-[9px] font-black uppercase tracking-wide text-black"
+              className="rounded-md bg-[#DFFF00] px-2 py-0.5 text-[10px] font-black tracking-wider uppercase text-black"
             >
               {muscle}
             </span>
           ))}
         </div>
 
-        <h3 className="text-sm font-black uppercase tracking-wide text-white">
+        {/* Title */}
+        <h3 className="text-lg font-bold uppercase tracking-tight text-white group-hover:text-[#DFFF00] transition-colors">
           {exercise.name}
         </h3>
 
-        <p className="mt-1 text-[11px] text-zinc-500">{exercise.equipment}</p>
+        {/* Equipment / Subtitle */}
+        <p className="mt-0.5 text-xs font-medium text-zinc-400">
+          {exercise.equipment}
+        </p>
 
-        <div className="my-3 h-px bg-zinc-800" />
+        {/* Spacer to push metadata to bottom */}
+        <div className="mt-auto pt-4">
+          {/* Bottom Stats Row */}
+          <div className="flex items-center gap-3 text-xs font-medium text-zinc-400">
+            {/* Duration */}
+            <div className="flex items-center gap-1">
+              <svg
+                className="h-3.5 w-3.5 stroke-zinc-400"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth="2"
+              >
+                <circle cx="12" cy="12" r="9" />
+                <path d="M12 7v5l3 3" />
+              </svg>
+              <span>{exercise.duration} min</span>
+            </div>
 
-        <div className="flex items-center gap-4 text-[10px] text-zinc-400">
-          <span className="flex items-center gap-1">
-            <span>◷</span>
-            {exercise.duration} min
-          </span>
+            <span>•</span>
 
-          <span className="flex items-center gap-1">
-            <span>●</span>
-            {exercise.caloriesBurned} kcal
-          </span>
+            {/* Calories */}
+            <div className="flex items-center gap-1">
+              <svg
+                className="h-3.5 w-3.5 stroke-zinc-400"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth="2"
+              >
+                <path d="M12 2c0 0-6 4-6 10a6 6 0 0 0 12 0c0-6-6-10-6-10z" />
+              </svg>
+              <span>{exercise.caloriesBurned} kcal</span>
+            </div>
 
-          <span className="flex items-center gap-1">
-            <span>☆</span>
-            {exercise.rating}
-          </span>
+            <span>•</span>
+
+            {/* Rating */}
+            <div className="flex items-center gap-1">
+              <span className="text-zinc-400">☆</span>
+              <span>{exercise.rating}</span>
+            </div>
+          </div>
         </div>
       </div>
     </Link>

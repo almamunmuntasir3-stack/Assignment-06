@@ -3,7 +3,7 @@ import Link from "next/link";
 
 const HeroBanner = () => {
   return (
-    <section className="mx-auto max-w-8xl px-4 pt-12 sm:px-6 lg:px-8">
+    <section className="mx-auto max-w-7xl px-4 pt-12 sm:px-6 lg:px-8">
       <div
         className="
           relative
