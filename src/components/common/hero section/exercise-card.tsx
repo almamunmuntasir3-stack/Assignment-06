@@ -9,7 +9,7 @@ interface ExerciseCardProps {
 const ExerciseCard = ({ exercise }: ExerciseCardProps) => {
   return (
     <Link
-      href={`/exercises/${exercise.id}`}
+      href={`/exercise/${exercise.id}`}
       className="group flex flex-col overflow-hidden rounded-2xl bg-[#121417] p-3 transition-transform duration-300 hover:-translate-y-1"
     >
       {/* Image Container */}
