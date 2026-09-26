@@ -1,7 +1,6 @@
 "use client";
 
 import { createContext, useContext, useState, ReactNode } from "react";
-
 import type { IExercise } from "@/components/type/exercise";
 
 interface ExerciseContextType {
@@ -10,6 +9,8 @@ interface ExerciseContextType {
 
   addToPlan: (exercise: IExercise) => void;
   addToSaved: (exercise: IExercise) => void;
+  removeFromPlan: (id: string | number) => void;
+  removeFromSaved: (id: string | number) => void;
 }
 
 const ExerciseContext = createContext<ExerciseContextType | undefined>(
@@ -22,22 +23,32 @@ export const ExerciseProvider = ({ children }: { children: ReactNode }) => {
 
   const addToPlan = (exercise: IExercise) => {
     setPlanList((prev) => {
-      if (prev.some((item) => item.id === exercise.id)) {
+      if (prev.some((item) => String(item.id) === String(exercise.id))) {
         return prev;
       }
-
       return [...prev, { ...exercise }];
     });
   };
 
   const addToSaved = (exercise: IExercise) => {
     setSavedList((prev) => {
-      if (prev.some((item) => item.id === exercise.id)) {
+      if (prev.some((item) => String(item.id) === String(exercise.id))) {
         return prev;
       }
-
       return [...prev, { ...exercise }];
     });
+  };
+
+  const removeFromPlan = (id: string | number) => {
+    setPlanList((prev) =>
+      prev.filter((item) => String(item.id) !== String(id)),
+    );
+  };
+
+  const removeFromSaved = (id: string | number) => {
+    setSavedList((prev) =>
+      prev.filter((item) => String(item.id) !== String(id)),
+    );
   };
 
   return (
@@ -47,6 +58,8 @@ export const ExerciseProvider = ({ children }: { children: ReactNode }) => {
         savedList,
         addToPlan,
         addToSaved,
+        removeFromPlan,
+        removeFromSaved,
       }}
     >
       {children}

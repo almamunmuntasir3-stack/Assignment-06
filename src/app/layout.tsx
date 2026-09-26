@@ -4,6 +4,7 @@ import "./globals.css";
 import { Toaster } from "sonner";
 
 import { ExerciseProvider } from "@/context/ExerciseContext";
+import Navbar from "@/components/common/navbar";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -32,6 +33,7 @@ export default function RootLayout({
     >
       <body className="min-h-screen bg-[#0B0C0E]">
         <ExerciseProvider>
+          <Navbar></Navbar>
           {children}
           <Toaster position="bottom-right" theme="dark" />
         </ExerciseProvider>

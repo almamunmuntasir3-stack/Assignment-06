@@ -1,5 +1,6 @@
 import Image from "next/image";
 import type { IExercise } from "@/components/type/exercise";
+import ExerciseActions from "@/components/common/hero section/exercise-actions";
 
 const getExercise = async (id: string): Promise<IExercise> => {
   const res = await fetch("https://api.abcz.workers.dev/api/fitlog", {
@@ -11,7 +12,6 @@ const getExercise = async (id: string): Promise<IExercise> => {
   }
 
   const exercises: IExercise[] = await res.json();
-
   const exercise = exercises.find((item) => String(item.id) === String(id));
 
   if (!exercise) {
@@ -32,7 +32,7 @@ const ExerciseDetailsPage = async ({
   return (
     <main className="min-h-screen bg-[#0E0F12] text-white flex items-center justify-center p-6 sm:p-12">
       <div className="w-full max-w-6xl grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
-        {/* LEFT COLUMN: Main Image */}
+        {/* LEFT COLUMN */}
         <div className="relative aspect-[4/5] w-full overflow-hidden rounded-3xl bg-[#16181D]">
           <Image
             src={exercise.image}
@@ -44,9 +44,8 @@ const ExerciseDetailsPage = async ({
           />
         </div>
 
-        {/* RIGHT COLUMN: Details & Actions */}
+        {/* RIGHT COLUMN */}
         <div className="flex flex-col space-y-6 pt-2">
-          {/* Header & Description */}
           <div>
             <h1 className="text-3xl sm:text-4xl font-extrabold uppercase tracking-tight text-white">
               {exercise.name}
@@ -56,7 +55,6 @@ const ExerciseDetailsPage = async ({
             </p>
           </div>
 
-          {/* Muscle Groups Badges */}
           <div className="flex flex-wrap gap-2">
             {exercise.muscleGroups.map((muscle) => (
               <span
@@ -68,7 +66,7 @@ const ExerciseDetailsPage = async ({
             ))}
           </div>
 
-          {/* Key Specs Card / Table */}
+          {/* Specs Card */}
           <div className="rounded-2xl border border-zinc-800/80 bg-[#16181D]/60 p-5 backdrop-blur-sm space-y-3.5 text-xs">
             <div className="flex items-center justify-between">
               <span className="font-bold tracking-wider text-zinc-400 uppercase">
@@ -78,7 +76,6 @@ const ExerciseDetailsPage = async ({
                 {exercise.equipment}
               </span>
             </div>
-
             <div className="flex items-center justify-between border-t border-zinc-800/60 pt-3.5">
               <span className="font-bold tracking-wider text-zinc-400 uppercase">
                 Difficulty
@@ -87,7 +84,6 @@ const ExerciseDetailsPage = async ({
                 {exercise.difficulty}
               </span>
             </div>
-
             <div className="flex items-center justify-between border-t border-zinc-800/60 pt-3.5">
               <span className="font-bold tracking-wider text-zinc-400 uppercase">
                 Sets
@@ -96,7 +92,6 @@ const ExerciseDetailsPage = async ({
                 {exercise.sets}
               </span>
             </div>
-
             <div className="flex items-center justify-between border-t border-zinc-800/60 pt-3.5">
               <span className="font-bold tracking-wider text-zinc-400 uppercase">
                 Reps
@@ -105,7 +100,6 @@ const ExerciseDetailsPage = async ({
                 {exercise.reps}
               </span>
             </div>
-
             <div className="flex items-center justify-between border-t border-zinc-800/60 pt-3.5">
               <span className="font-bold tracking-wider text-zinc-400 uppercase">
                 Duration
@@ -114,7 +108,6 @@ const ExerciseDetailsPage = async ({
                 {exercise.duration} min
               </span>
             </div>
-
             <div className="flex items-center justify-between border-t border-zinc-800/60 pt-3.5">
               <span className="font-bold tracking-wider text-zinc-400 uppercase">
                 Calories
@@ -123,7 +116,6 @@ const ExerciseDetailsPage = async ({
                 {exercise.caloriesBurned} kcal
               </span>
             </div>
-
             <div className="flex items-center justify-between border-t border-zinc-800/60 pt-3.5">
               <span className="font-bold tracking-wider text-zinc-400 uppercase">
                 Rating
@@ -134,12 +126,11 @@ const ExerciseDetailsPage = async ({
             </div>
           </div>
 
-          {/* Instructions Section */}
+          {/* Instructions */}
           <div className="space-y-3 pt-2">
             <h2 className="text-xs font-bold uppercase tracking-wider text-zinc-300">
               Instructions
             </h2>
-
             <ol className="space-y-2 text-xs text-zinc-400 leading-relaxed">
               {exercise.instructions.map((instruction, index) => (
                 <li key={index} className="flex items-start gap-2">
@@ -152,48 +143,8 @@ const ExerciseDetailsPage = async ({
             </ol>
           </div>
 
-          {/* Action Buttons */}
-          <div className="flex items-center gap-3 pt-2">
-            <button
-              type="button"
-              className="flex-1 inline-flex items-center justify-center gap-2 rounded-xl bg-[#D4FF00] px-5 py-3.5 text-xs font-extrabold text-black transition hover:bg-[#c5f000] active:scale-[0.98]"
-            >
-              <svg
-                className="h-4 w-4"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                strokeWidth={2.5}
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-                />
-              </svg>
-              Add to today&apos;s plan
-            </button>
-
-            <button
-              type="button"
-              className="flex-1 inline-flex items-center justify-center gap-2 rounded-xl border border-zinc-800 bg-[#16181D]/80 px-5 py-3.5 text-xs font-semibold text-zinc-300 transition hover:bg-zinc-800 hover:text-white active:scale-[0.98]"
-            >
-              <svg
-                className="h-4 w-4"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                strokeWidth={2}
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"
-                />
-              </svg>
-              Save for later
-            </button>
-          </div>
+          {/* Connected Action Buttons Component */}
+          <ExerciseActions exercise={exercise} />
         </div>
       </div>
     </main>
