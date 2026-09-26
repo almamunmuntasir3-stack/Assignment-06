@@ -5,6 +5,7 @@ import { Toaster } from "sonner";
 
 import { ExerciseProvider } from "@/context/ExerciseContext";
 import Navbar from "@/components/common/navbar";
+import Footer from "@/components/common/footer";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -35,6 +36,7 @@ export default function RootLayout({
         <ExerciseProvider>
           <Navbar></Navbar>
           {children}
+          <Footer></Footer>
           <Toaster position="bottom-right" theme="dark" />
         </ExerciseProvider>
       </body>
