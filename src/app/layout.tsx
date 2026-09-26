@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { Toaster } from "sonner";
 
 import { ExerciseProvider } from "@/context/ExerciseContext";
 
@@ -30,7 +31,10 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-screen bg-[#0B0C0E]">
-        <ExerciseProvider>{children}</ExerciseProvider>
+        <ExerciseProvider>
+          {children}
+          <Toaster position="bottom-right" theme="dark" />
+        </ExerciseProvider>
       </body>
     </html>
   );
