@@ -1,4 +1,3 @@
-// src/components/common/hero section/exercise-actions.tsx
 "use client";
 
 import { toast } from "sonner";

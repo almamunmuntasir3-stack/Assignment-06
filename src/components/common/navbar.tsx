@@ -12,7 +12,6 @@ export const Navbar = () => {
   return (
     <header className="sticky top-0 z-50 border-b border-zinc-900 bg-[#0c0d10]/95 backdrop-blur-md">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6 lg:px-12">
-        {/* Logo Icon + Brand Text */}
         <Link href="/" className="flex items-center gap-2.5">
           <Image
             src="/logo.png"
@@ -27,7 +26,6 @@ export const Navbar = () => {
           </span>
         </Link>
 
-        {/* Center Pill Navigation */}
         <nav className="flex items-center gap-1 rounded-full border border-zinc-800/80 bg-zinc-950/80 p-1">
           <Link
             href="/"
